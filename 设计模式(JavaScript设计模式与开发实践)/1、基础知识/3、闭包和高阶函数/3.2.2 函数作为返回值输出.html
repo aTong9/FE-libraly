@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>3.2.2 函数作为返回值输出</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    /**
+  * 1相比把函数当作参数传递，函数当作返回值输出的应用场景也许更多，也更能体现函数式编程的巧妙。让函数继续返回一个可执行的函数，意味着运算过程是可延续的。
+  *  1. 判断数据的类型我们来看看这个例子，判断一个数据是否是数组，在以往的实现中，可以基于鸭子类型的概念来判断，比如判断这个数据有没有length属性，
+  *  有没有sort方法或者slice方法等。但更好的方式是用Object.prototype.toString来计算。Object.prototype.toString.call( obj )返回一个字符串，
+  *  比如Object.prototype.toString.call(  [1,2,3]  )总是返回"[object  Array]"，而Object.prototype.toString.call( “str”)总是返回"[object String]"。
+  *  所以我们可以编写一系列的isType函数
+  */
+    var Type = {}
+    for (let i = 0, type; type = ['String', 'Array', 'Number'][i++];) {
+        Type[`is${type}`] = ((obj) => {
+            return Object.prototype.toString.call(obj) === `[object ${type}]`
+        })
+    }
+    console.log(Type.isArray([]))
+    console.log(Type.isString('123'))
+    /**
+     * 2. getSingle下面是一个单例模式的例子，在第三部分设计模式的学习中，我们将进行更深入的讲解，这里暂且只了解其代码实现
+     */
+    var getSingle = (fn) => {
+        var ret;
+        return function () {
+            return ret || (ret = fn.apply(this, arguments));
+        }
+    }
+    var getScript = getSingle(() => {
+        return document.createElement('script');
+    })
+    var script1 = getScript()
+    var script2 = getScript()
+    console.log(script1 === script2)
+</script>
+
+</html>

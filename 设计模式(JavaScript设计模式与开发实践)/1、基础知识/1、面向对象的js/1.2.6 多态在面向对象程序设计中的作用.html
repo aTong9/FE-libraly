@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>1.2.6 多态在面向对象程序设计中的作用</title>
+</head>
+<body>
+
+</body>
+<script>
+    var googleMap = {
+        show: function () {
+            console.log('开始渲染谷歌地图')
+        }
+    }
+    //增加百度地图
+    var baiduMap = {
+        show: function () {
+            console.log('开始渲染baidu地图')
+        }
+    }
+
+
+    //增加搜狐地图
+    var souhuMap = {
+        show: function () {
+            console.log('开始渲染souhu地图')
+        }
+    }
+
+
+    // 可扩展性差
+    //    var renderMap = function (type) {
+    //        if (type === "google") {
+    //            googleMap.show();
+    //        } else if (type === "baidu") {
+    //            baiduMap.show();
+    //        }
+    //    }
+    //    renderMap('google');
+    //    renderMap('baidu');
+
+
+    //    相同部分抽象出来
+    var renderMap = function (map) {
+        if (map.show instanceof Function) {    //注意是检测map.show
+            map.show();
+        }
+    }
+    renderMap(googleMap);
+    renderMap(baiduMap);
+    renderMap(souhuMap);
+
+</script>
+</html>

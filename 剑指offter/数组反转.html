@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>数组反转</title>
+</head>
+
+<body>
+  <script>
+    var arr = [6, 5, 4, 3, 2, 1]
+    for (var i = 0; i < arr.length / 2; i++) { // length/2 效率增加一倍
+      // arr[0]   arr[arr.length-1-0]   arr.length-1 // 数组最后一位
+      // arr[1]   arr[arr.length-1-1]   arr.length-1 // 数组最后一位
+      // arr[2]   arr[arr.length-1-2]   arr.length-1 // 数组最后一位
+      var temp = arr[i]
+      arr[i] = arr[arr.length - 1 - i]
+      arr[arr.length - 1 - i] = temp
+    }
+    console.log(arr)
+  </script>
+</body>
+
+</html>

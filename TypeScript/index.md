@@ -1,0 +1,1 @@
+## [typescript入门教程](https://ts.xcatliu.com/basics/type-assertion.html)

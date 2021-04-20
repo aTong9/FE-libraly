@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>1.4.6 原型继承的未来 </title>
+</head>
+<body>
+
+</body>
+<script>
+    var obj = {name: "bin"};
+
+    var A = function () {
+
+    }
+    A.prototype = obj;
+
+    var a = new A();
+    console.log(a.name)
+
+
+
+
+
+
+    var A = function () {
+
+    }
+    A.prototype = {name: 'binbin'}
+
+    var B = function () {
+
+    }
+    B.prototype = new A();
+
+    var b = new B();
+    console.log(b.name)
+</script>
+</html>

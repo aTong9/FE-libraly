@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>3.1.4 闭包和面向对象设计</title>
+</head>
+<body>
+
+</body>
+<script>
+    //    下面来看看这段跟闭包相关的代码：
+    var extent = function () {
+        var value = 0;
+        console.log('0000:-' + value)
+        return {
+            call: function () {
+                console.log(value + ':-' + value)
+                value++;
+                console.log(value)
+            }
+        }
+    }
+    var extent = extent();
+    extent.call();
+    extent.call();
+    extent.call();
+    extent.call();
+    console.log('-------------------------------------')
+    //    如果换成面向对象的写法，就是：
+    var extentCall = {
+        value: 0,
+        call: function () {
+            this.value++;
+            console.log(this.value)
+        }
+    }
+    extentCall.call();
+    extentCall.call();
+    extentCall.call();
+    console.log('-------------------------------------')
+    //    或者：
+    var extentFun = function () {
+        this.value = 10;
+    }
+    extentFun.prototype.calln = function () {
+        this.value++;
+        console.log(this.value)
+    }
+    var extentfun = new extentFun();
+    extentfun.calln();
+    extentfun.calln();
+    extentfun.calln();
+</script>
+</html>

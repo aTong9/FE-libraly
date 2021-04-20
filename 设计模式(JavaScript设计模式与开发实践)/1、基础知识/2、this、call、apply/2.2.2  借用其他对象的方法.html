@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>2.2.2 借用其他对象的方法</title>
+</head>
+<body>
+
+</body>
+<script>
+    /*函数的参数列表 arguments 是一个类数组对象，虽然它也有“下标”，但它并非真正的数组，
+     所以也不能像数组一样，进行排序操作或者往集合里添加一个新的元素。这种情况下，我们常常
+     会借用 Array.prototype 对象上的方法。比如想往 arguments 中添加一个新的元素，通常会借用
+     Array.prototype.push：*/
+    (function(){
+        Array.prototype.push.call( arguments, 3 );
+        console.log ( arguments ); // 输出[1,2,3]
+    })( 1, 2 );
+
+
+    var a = {};
+    Array.prototype.push.call( a, 'first' );
+    console.log ( a.length ); // 输出：1
+    console.log ( a ); // first
+
+
+
+    var A = function (name, sex, age) {
+        this.name = name;
+        this.sex = sex;
+        this.age = age;
+    }
+    var B = function () {
+        A.apply(this, arguments)
+    }
+    var C = function () {
+        B.apply(this, arguments)
+    }
+    B.prototype.getName = function () {
+        return 'b继承a---' + this.name + ' ----- ' + this.sex + '-----' + this.age;
+    }
+    C.prototype.getAge = function () {
+        return 'c继承b---' + this.name + ' ----- ' + this.sex + '-----' + this.age;
+    }
+    var b = new B('seven', '男', '19')
+    var c = new C('x', 'nv', '18')
+    console.log(b.getName())
+    console.log(c.getAge())
+
+
+
+</script>
+</html>

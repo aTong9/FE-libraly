@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>call和apply</title>
+</head>
+<body>
+
+</body>
+<script>
+    var obj1 = {
+        name: "ss"
+    }
+
+    var obj2 = {
+        name: 'xx'
+    }
+
+    window.name = "window"
+
+    var getName = function () {
+        console.log(this.name)
+    }
+    getName();  //this指向全局
+    getName.call(obj1);   //call改变this指向
+    getName.call(obj2);   //call改变this指向
+
+
+    //    大部分高级浏览器都实现了内置的 Function.prototype.bind，用来指定函数内部的 this指向，
+    //    即使没有原生的 Function.prototype.bind 实现，我们来模拟一个也不是难事
+    Function.prototype.bind = function (context) {
+        var self = this;
+        return function () {
+            return self.apply(context, arguments)
+        }
+    }
+
+    var obj = {
+        name: 'sevn'
+    }
+
+    var func = function () {
+        console.log(this.name)
+    }.bind(obj)
+
+    func();
+
+
+    //    这是一个简化版的 Function.prototype.bind 实现，通常我们还会把它实现得稍微复杂一点，
+    //    使得可以往 func 函数中预先填入一些参数：
+    Function.prototype.bind = function () {
+        var self = this,
+                context = [].shift.call(arguments),
+                args = [].slice.call(arguments);
+        console.log(context)
+        console.log('args:' + args)
+        return function () {
+            console.log('3333---' + [].slice.call(arguments))
+            console.log('44444---' + self.apply(context, [].concat.call(args, [].slice.call(arguments))))
+
+            return self.apply(context, [].concat.call(args, [].slice.call(arguments)))
+        }
+    }
+
+    var objs = {
+        name: "args"
+    }
+
+    var funcs = function (a, b, c, d, e) {
+        console.log('复杂版：' + this.name)
+        console.log('复杂版：' + [a, b, c, d, e])
+    }.bind(objs, 1, 2)
+
+    funcs('x', 'y', 'z')
+</script>
+</html>

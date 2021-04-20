@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>1.4.1 使用克隆的原型模式</title>
+</head>
+<body>
+
+</body>
+<script>
+    var Plane = function () {
+        this.blood = 100;
+        this.attackLevel = 1;
+        this.defenseLevel = 1;
+    };
+
+    var plane = new Plane();
+    plane.blood = 500;
+    plane.attackLevel = 10;
+    plane.defenseLevel = 7;
+
+    console.log(plane);
+
+    var clonePlane = Object.create(plane);    //Object.create可以用来克隆对象
+    console.log(clonePlane);
+</script>
+</html>

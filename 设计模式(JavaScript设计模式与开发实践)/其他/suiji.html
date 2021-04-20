@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, proxy-revalidate, max-age=0" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover"/>
+  <title>随机生成</title>
+</head>
+<body>
+<div id="app">
+  <button>字数 <input type="text" value="2" class="number"></button> 
+  <button class="suiji">随机生成</button>
+  <p class="text"></p>
+</div>
+<script src="https://cdn.bootcss.com/jquery/2.0.3/jquery.js"></script>
+<script>
+  function getRandomArrayElements(arr, count) {
+    var shuffled = arr.slice(0), i = arr.length, min = i - count, temp, index;
+    while (i-- > min) {
+        index = Math.floor((i + 1) * Math.random());
+        temp = shuffled[index];
+        shuffled[index] = shuffled[i];
+        shuffled[i] = temp;
+    }
+    return shuffled.slice(min);
+}
+$(function(){
+  var str ='才,川,千,夕,戈,仁,少,升,心,册,世,仕,仙,正,臣,丞,存,如,守,西,先,早,舟,成,壮,劭,秀,序,孜,赟,妡,昌,弨,承,初,庚,金,侃,青,尚,宗,宬,春,度,秋,姝,思,庠,信,星,叙,宣,则,姿,财,仓,敇,鬯,宸,乘,持,纯,祠,刚,峻,倩,珊,师,书,纾,素,笑,修,钊,真,拯,祖,祚,彩,钗,晨,琤,崇,钏,问,珠,得,珮,绍,爽,欷,祥,悦,紫,敞,超,朝,创,词,钧,竣,剀,钤,钦,情,然,善,盛,舒,顺,舜,斯,惜,晰,羡,,琇,绚,诏,粲,琛,楚,庄,琮,捷,靖,铃,诗,轼,想,新,歆,绣,,煦,暄,铉,询,钰,裕,钺,资,嫦,玚,诚,铖,慈,翠,聚,铭,齐,铨,瑞,睿,韶,慎,僖,逍,银,瑜,赈,婵,冲,翥,赐,锋,剑,靓,锐,胜,奭,绪,稹,皞,氅,赪,璁,璀,钢,锦,静,穆,錡,嫱,羲,谕,缜铮,禅,聪,锷,徽,键,骏,链,声,谡,逊,翼,钟,翱,璨,蝉,镐,环,铠,镕,赜,镇,鏖,镖,宠,畴,镜,铿,选,赞,铧,锏,续,译,骢,铎,燨,镔,铸,鉴,骁,镳,鑫,瓒,骥,銮';
+  var items = str.split(',')
+  console.log(items)
+  var item = items[Math.floor(Math.random()*items.length)];
+  $('.suiji').click(function(){
+    var number = $('.number').val()
+    console.log(getRandomArrayElements(items, number))
+    $('.text').html(getRandomArrayElements(items, number))
+  })
+})
+</script>
+</body>
+</html>

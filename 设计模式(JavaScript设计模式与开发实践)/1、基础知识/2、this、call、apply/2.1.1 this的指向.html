@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>2.1.1 this的指向</title>
+</head>
+<body>
+
+</body>
+<script>
+    //    1. 作为对象的方法调用
+    var obj = {
+        a: '1',
+        getA: function () {
+            console.log(this === obj)
+            console.log(this.a)
+        }
+    }
+    obj.getA();
+
+
+    //2. 作为普通函数调用
+    window.name = 'global name'
+
+    var myObject = {
+        name: 'bin',
+        getName: function () {
+            return this.name;
+        }
+    }
+
+    console.log(typeof myObject.getName())  //string
+    console.log(myObject.getName());  //bin
+
+    var getName = myObject.getName;
+    console.log(typeof myObject.getName)  //functions
+    console.log(getName());           //global name
+
+
+    //    3. 构造器调用
+    var myClass = function () {
+        this.name = 'seven';
+        return {             // 显式地返回一个对象
+            name: 'anne'
+        }
+    }
+    var obj = new myClass();
+    console.log('3:' + obj.name);  // 输出：anne
+
+
+    var MyClass = function () {
+        this.name = 'sven'
+        return 'anne'; // 返回 string 类型
+    };
+    var obj = new MyClass();
+    console.log('3:不显示的返回一个对象就输出------' + obj.name); // 输出：sven
+
+
+    //    4. Function.prototype.call 或 Function.prototype.apply 调用
+    var obj1 = {
+        name: 'sven2',
+        getName: function () {
+            return this.name;
+        }
+    };
+    var obj2 = {
+        name: 'anne2'
+    };
+    console.log(obj1.getName())            // 输出: sven
+    console.log(obj1.getName.call(obj2))   // 输出：anne
+
+
+</script>
+</html>
