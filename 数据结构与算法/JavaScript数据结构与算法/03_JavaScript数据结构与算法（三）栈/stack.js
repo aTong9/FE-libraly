@@ -39,7 +39,6 @@ class Stack {
     return result;
   }
 }
-
 // 以下为ES5写法
 // function Stack() {
 //   this.items = []
@@ -47,6 +46,6 @@ class Stack {
 //     this.items.push(element)
 //   }
 // }
-// const stack = new Stack()
-// stack.push(2)
-// console.log(stack.items)
+const stack = new Stack()
+stack.push(2)
+console.log(stack.items)
